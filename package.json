@@ -1,0 +1,23 @@
+{
+  "name": "coanmo-sandbox-firestore",
+  "version": "1.0.0",
+  "description": "A CoAnMo Sandbox for trying out Firestore, Google Cloud’s NoSQL document database",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "rm -rf docs && parcel build -d docs --public-url /CoAnMo-Sandbox-Firestore/ index.html"
+  },
+  "dependencies": {
+    "coanmo-plugin-cli": "1.2.5"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.6.1",
+    "typescript": "^3.9.7"
+  },
+  "keywords": [],
+  "homepage": "https://rmplastow.github.io/CoAnMo-Sandbox-Firestore",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rmplastow/CoAnMo-Sandbox-Firestore"
+  }
+}
