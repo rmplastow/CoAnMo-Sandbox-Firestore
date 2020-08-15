@@ -1,4 +1,4 @@
 import { CoAnMoPluginCliActions } from "coanmo-plugin-cli";
-import { random } from "./random";
+import { about } from "./about";
 
-export const actions = [random, ...CoAnMoPluginCliActions];
+export const actions = [about, ...CoAnMoPluginCliActions];
