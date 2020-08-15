@@ -1,5 +1,5 @@
 import "./style";
-import { name, version } from "../package.json";
+import { description, name, version } from "../package.json";
 import { CoAnMoPluginCli } from "coanmo-plugin-cli";
 import { actions } from "./Actions/actions";
 
@@ -7,8 +7,8 @@ class CoAnMoSandboxFirestore {
   private cli: CoAnMoPluginCli;
 
   constructor(
-    private name: string,
-    private version: string,
+    name: string,
+    version: string,
     selector: string,
     doc: HTMLDocument,
     meta: string,
@@ -24,7 +24,13 @@ class CoAnMoSandboxFirestore {
     );
 
     this.cli.addActions(actions);
-    this.cli.log("Ready");
+    this.cli.log(
+      ["-".repeat(40),
+      description,
+      "To get started, run:",
+      "  > about",
+      "-".repeat(40)
+    ].join("\n"));
   }
 
   receiveMessage(event: MessageEvent) {
