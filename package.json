@@ -1,7 +1,7 @@
 {
   "name": "coanmo-sandbox-firestore",
-  "version": "1.0.0",
-  "description": "A CoAnMo Sandbox for trying out Firestore, Google Cloud’s NoSQL document database",
+  "version": "1.0.1",
+  "description": "A CoAnMo Sandbox for trying out Firestore, Google Cloud’s NoSQL document database.",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
