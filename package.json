@@ -1,18 +1,36 @@
 {
   "name": "coanmo-sandbox-firestore",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A CoAnMo Sandbox for trying out Firestore, Google Cloud’s NoSQL document database.",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
-    "build": "rm -rf docs && parcel build -d docs --public-url /CoAnMo-Sandbox-Firestore/ index.html"
+    "build": "rm -rf docs && parcel build -d docs --public-url /CoAnMo-Sandbox-Firestore/ index.html",
+    "test": "npx jest --runInBand --detectOpenHandles --colors --verbose --reporters=default"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "moduleNameMapper": {
+      "\\.css$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "dependencies": {
     "coanmo-plugin-cli": "1.2.5"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.8",
+    "jest": "^26.1.0",
     "parcel-bundler": "^1.6.1",
-    "typescript": "^3.9.7"
+    "ts-jest": "^26.1.3",
+    "typescript": "^3.9.6"
   },
   "keywords": [],
   "homepage": "https://rmplastow.github.io/CoAnMo-Sandbox-Firestore",
