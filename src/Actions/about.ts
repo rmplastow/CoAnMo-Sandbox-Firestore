@@ -143,7 +143,7 @@ export const about: ActionI = {
   > about
 To show just the third section:
   > about 3`,
-  fn(args: string[]) {
+  fn(args) {
     if (args.length === 0)
       return `These instructions explain how to:\n${sections
         .map(({ heading }, index) => `  ${index + 1}. ${heading}`)
