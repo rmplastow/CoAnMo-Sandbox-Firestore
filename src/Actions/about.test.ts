@@ -22,11 +22,13 @@ const mockContext: ActionContextI = {
 describe("about.fn()", () => {
   it("returns the expected string when passed no arguments", () => {
     expect(fn([], mockContext)).toContain(
-      "These instructions explain how to:\n  1. ");
+      "These instructions explain how to:\n  1. "
+    );
   });
   it("returns as expected when passed '1'", () => {
     expect(fn(["1"], mockContext)).toContain(
-      "1. Create a new Google Cloud account\n\n");
+      "1. Create a new Google account\n\n"
+    );
   });
   it("returns an error when passed '0'", () => {
     expect(fn(["0"], mockContext)).toBe(
