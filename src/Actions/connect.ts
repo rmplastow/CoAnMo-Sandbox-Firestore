@@ -32,11 +32,11 @@ export const connect: ActionI = {
   summary: "Connect to a Firebase app",
   synopsis: `@TODO write synopsis`,
   fn(args, context) {
+    const { log, store } = context;
     if (args.length !== 0)
       return `ERROR: 'connect' expected 0 args, but got ${args.length}`;
     
     // Validate `store`.
-    const { store } = context;
     const errors = validators.map(
       ({ name, rx }): string | false => {
         const result = isInvalid(store[name], rx);
@@ -56,24 +56,26 @@ export const connect: ActionI = {
       // Initialize Firebase, and get a reference to the database service.
       firebase.initializeApp(store);
       const db = firebase.firestore();
+      // firebase.setLogLevel('debug');
 
-      // Check that the ‘things’ collection exists.
+      // Run an actual operation on the databse, by checking that the ‘things’
+      // collection exists.
       db.collection("things")
         .limit(1)
         .get()
-        .then((snapshot: any) => {
-          console.log(`#${asyncId} Firebase and firestore initialized ok`);
+        .then((snapshot) => {
+          log(`#${asyncId} Firebase initialized ok`);
           if (snapshot.size === 0)
-            console.log(`#${asyncId} Database has no ‘things’ collection`);
+            log(`#${asyncId} Firebase has no ‘things’ collection`);
         })
-        .catch((err: Error) => {
-          console.log(`ERROR: #${asyncId} Failed to read the ‘things’ collection:\n  ${err}`);
-        });
+        .catch(
+          (err: Error) => log(`ERROR: #${asyncId} \`connect\` failed:\n  ${err}`)
+        );
 
+      return "`connect` results will be marked #" + asyncId;
     } catch (err) {
-      console.log(`ERROR: #${asyncId} Failed:\n  ${err}`);
+      return `ERROR: \`connect\` failed:\n  ${err}`;
     }
 
-    return "`connect` results will be marked #" + asyncId;
   }
 };
