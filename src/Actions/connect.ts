@@ -1,4 +1,5 @@
 import { ActionI } from "coanmo-plugin-cli";
+import * as firebase from 'firebase';
 
 interface Validator {
   name: string,
@@ -44,6 +45,35 @@ export const connect: ActionI = {
     ).filter( result => result );
     if (errors.length !== 0) return errors.join('\n');
 
-    return `@TODO connect to the Firestore`;
+    // Check that the Firebase library has loaded.
+    if (typeof window !== "object")
+      return `ERROR: firebase is not an object`;
+
+    const asyncId = (~~(Math.random() * 1e9)).toString(36);
+
+    try {
+
+      // Initialize Firebase, and get a reference to the database service.
+      firebase.initializeApp(store);
+      const db = firebase.firestore();
+
+      // Check that the ‘things’ collection exists.
+      db.collection("things")
+        .limit(1)
+        .get()
+        .then((snapshot: any) => {
+          console.log(`#${asyncId} Firebase and firestore initialized ok`);
+          if (snapshot.size === 0)
+            console.log(`#${asyncId} Database has no ‘things’ collection`);
+        })
+        .catch((err: Error) => {
+          console.log(`ERROR: #${asyncId} Failed to read the ‘things’ collection:\n  ${err}`);
+        });
+
+    } catch (err) {
+      console.log(`ERROR: #${asyncId} Failed:\n  ${err}`);
+    }
+
+    return "`connect` results will be marked #" + asyncId;
   }
 };
